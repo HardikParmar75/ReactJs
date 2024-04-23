@@ -1,8 +1,20 @@
-import React, { useState } from 'react'
+import React, { createContext, useContext, useState} from 'react'
+
+
+const CheckContext = createContext()
+
+function CheckListProvider({children}){
+  const [citizen, setCitizen] = useState("")
+  const [age, setAge] = useState("")
+
+  return (
+    <CheckContext.Provider value={{citizen, setCitizen, age, setAge}}>{children}</CheckContext.Provider>
+  )
+}
 
 function Form() {
-    const [citizen,setCitizen] = useState(true)
-    const [age,setAge] = useState(true)
+  const {citizen, setCitizen, age, setAge} = useContext(CheckContext)
+    
     
   return (
     <div className='container mt-5 w-50 text-center'>
@@ -23,5 +35,5 @@ function Form() {
     </div>
   )
 }
-
+export {CheckListProvider}
 export default Form
